@@ -1,65 +1,205 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+import { programsConfig } from "@/config/programs.config";
+import { heroSlides, siteConfig } from "@/config/site.config";
+import { HeroCarousel } from "@/components/hero-carousel";
+import { LinkButton } from "@/components/link-button";
+import { Reveal } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { getFeaturedNewsPosts } from "@/lib/content";
+import { formatDate } from "@/lib/utils";
+
+export default async function Home() {
+  const featuredPosts = await getFeaturedNewsPosts(3);
+  const leadUpdate = featuredPosts[0];
+  const supportingUpdates = featuredPosts.slice(1);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <>
+      <HeroCarousel slides={heroSlides} />
+
+      <section className="relative border-t border-white/10 bg-[var(--color-bg)] py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--color-accent-glow),transparent_30%),radial-gradient(circle_at_bottom_right,var(--color-accent-soft),transparent_42%)]" />
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Programs"
+              title="Choose the right program for your player."
+              body="Blythewood offers recreational soccer, Junior Academy, and Select teams for different ages and levels."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </Reveal>
+
+          <div className="mt-14 grid gap-5 lg:grid-cols-3">
+            {programsConfig.map((program, index) => (
+              <Reveal key={program.slug} delay={index * 0.08}>
+                <Link
+                  href={`/programs/${program.slug}/`}
+                  className="group flex h-full flex-col justify-between rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,var(--color-surface-strong),rgba(255,255,255,0.02))] p-7 transition duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-strong)]"
+                >
+                  <div>
+                    <p className="text-xs font-semibold tracking-[0.32em] uppercase text-[var(--color-accent)]">
+                      {program.ageBand}
+                    </p>
+                    <h2 className="mt-5 font-display text-5xl leading-[0.88] text-white">
+                      {program.title}
+                    </h2>
+                    <p className="mt-4 text-base leading-7 text-[var(--color-text-muted)]">
+                      {program.summary}
+                    </p>
+                  </div>
+                  <div className="mt-10 flex items-center justify-between text-sm font-semibold uppercase tracking-[0.22em] text-white/70">
+                    <span>Explore program</span>
+                    <span className="transition group-hover:text-[var(--color-accent)]">
+                      →
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[var(--color-bg-alt)] py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:px-12">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Why Blythewood"
+              title="Strong coaching, clear communication, and a welcoming club culture."
+              body="Blythewood Soccer Club gives local families a place to train, compete, and grow in the game."
+            />
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <div className="grid gap-6 sm:grid-cols-[0.75fr_1.25fr]">
+              <div className="relative min-h-64 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(59,130,246,0.28),rgba(15,23,42,0.82))]">
+                <Image
+                  src="/images/logo.png"
+                  alt="Blythewood Soccer Club crest"
+                  fill
+                  unoptimized
+                  className="object-contain p-8 opacity-90"
+                />
+              </div>
+              <div className="space-y-5">
+                {siteConfig.homeProofPoints.map((item) => (
+                  <div
+                    key={item.title}
+                    className="border-l border-[var(--color-accent)] pl-5"
+                  >
+                    <p className="text-xs font-semibold tracking-[0.24em] uppercase text-[var(--color-accent)]">
+                      {item.title}
+                    </p>
+                    <p className="mt-3 text-lg leading-8 text-white/88">{item.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[var(--color-bg)] py-24">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <Reveal>
+            <SectionHeading
+              eyebrow="News & Events"
+              title="Latest club updates."
+              body="Find registration dates, evaluation updates, and club announcements."
+            />
+          </Reveal>
+
+          {leadUpdate ? (
+            <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+              <Reveal>
+                <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[var(--color-surface)]">
+                  <div className="relative aspect-[16/10]">
+                    <Image
+                      src={leadUpdate.coverImage}
+                      alt={leadUpdate.title}
+                      fill
+                      unoptimized
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <p className="text-xs font-semibold tracking-[0.26em] uppercase text-[var(--color-accent)]">
+                      {leadUpdate.category ?? "Club News"} • {formatDate(leadUpdate.date)}
+                    </p>
+                    <h3 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+                      {leadUpdate.title}
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--color-text-muted)]">
+                      {leadUpdate.excerpt}
+                    </p>
+                    <Link
+                      href={`/news/${leadUpdate.slug}/`}
+                      className="mt-6 inline-flex text-sm font-semibold uppercase tracking-[0.24em] text-white hover:text-[var(--color-accent)]"
+                    >
+                      Read update
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+
+              <div className="grid gap-5">
+                {supportingUpdates.map((post, index) => (
+                  <Reveal key={post.slug} delay={index * 0.08}>
+                    <article className="rounded-[2rem] border border-white/10 bg-[var(--color-surface)] p-6">
+                      <p className="text-xs font-semibold tracking-[0.26em] uppercase text-[var(--color-accent)]">
+                        {post.category ?? "Club News"} • {formatDate(post.date)}
+                      </p>
+                      <h3 className="mt-4 text-2xl font-semibold leading-tight text-white">
+                        {post.title}
+                      </h3>
+                      <p className="mt-4 text-base leading-7 text-[var(--color-text-muted)]">
+                        {post.excerpt}
+                      </p>
+                      <Link
+                        href={`/news/${post.slug}/`}
+                        className="mt-6 inline-flex text-sm font-semibold uppercase tracking-[0.24em] text-white hover:text-[var(--color-accent)]"
+                      >
+                        Read update
+                      </Link>
+                    </article>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[linear-gradient(135deg,var(--color-accent-strong),var(--color-bg))] py-20">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12">
+          <Reveal>
+            <div className="max-w-3xl">
+              <p className="text-xs font-semibold tracking-[0.34em] uppercase text-[var(--color-accent)]">
+                Registration
+              </p>
+              <h2 className="mt-4 font-display text-5xl leading-[0.9] text-white sm:text-6xl">
+                Ready to get started?
+              </h2>
+              <p className="mt-5 text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
+                Use the registration link to get started or visit the news page for current dates and updates.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <div className="flex flex-wrap gap-3">
+              <LinkButton
+                href={siteConfig.heroSlides[0].secondaryCtaHref ?? siteConfig.heroSlides[0].ctaHref}
+              >
+                Start Registration
+              </LinkButton>
+              <LinkButton href="/news/" variant="secondary">
+                Current updates
+              </LinkButton>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }

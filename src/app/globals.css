@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a;
+  --foreground: #f8fafc;
+
+  --color-bg: #0f172a;
+  --color-bg-alt: #162033;
+  --color-bg-elevated: #1e293b;
+
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-surface-strong: rgba(255, 255, 255, 0.07);
+
+  --color-accent: #3b82f6;
+  --color-accent-strong: #2563eb;
+  --color-accent-soft: rgba(59, 130, 246, 0.14);
+  --color-accent-glow: rgba(96, 165, 250, 0.22);
+
+  --color-text: #f8fafc;
+  --color-text-muted: #cbd5e1;
+  --color-text-subtle: #94a3b8;
+
+  --color-border: rgba(148, 163, 184, 0.2);
+  --color-border-strong: rgba(148, 163, 184, 0.32);
+
+  --overlay-hero: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.55),
+    rgba(15, 23, 42, 0.94)
+  );
+  --overlay-image: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.18),
+    rgba(15, 23, 42, 0.84)
+  );
+  --overlay-image-strong: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(15, 23, 42, 0.84) 88%
+  );
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-bebas);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, var(--color-accent-glow), transparent 25%),
+    linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  color: var(--color-text);
+  font-family: var(--font-manrope), sans-serif;
+}
+
+a,
+button {
+  outline-color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.news-prose {
+  max-width: 46rem;
+  color: var(--color-text-muted);
+}
+
+.news-prose h2,
+.news-prose h3 {
+  margin-top: 2rem;
+  color: white;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.news-prose h2 {
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+}
+
+.news-prose h3 {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+}
+
+.news-prose p,
+.news-prose ul,
+.news-prose ol {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.news-prose ul,
+.news-prose ol {
+  padding-left: 1.2rem;
+}
+
+.news-prose li + li {
+  margin-top: 0.5rem;
+}
+
+.news-prose a {
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.2em;
+}
+
+.news-prose strong {
+  color: white;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.28);
+  color: white;
 }
