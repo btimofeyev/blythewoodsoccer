@@ -173,7 +173,7 @@ export const siteConfig = {
   tagline: "Youth soccer for families who want a stronger local club experience.",
   defaultOgImage: "/images/evaluations-hero.jpg",
   phone: "803-402-3605",
-  email: "info@blythewoodsoccer.com",
+  email: "blythewoodsoccerclub@gmail.com",
   addressLines: ["PO Box 983", "Blythewood, South Carolina 29016"],
   socials: [
     { label: "Facebook", href: "https://www.facebook.com/BlythewoodSoccer" },

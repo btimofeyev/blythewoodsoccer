@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { LinkButton } from "@/components/link-button";
+import { contactConfig } from "@/config/contact.config";
 import { linksConfig } from "@/config/links.config";
 import type { HeroSlide } from "@/lib/types";
 
@@ -55,8 +56,8 @@ const newsItems = [
 ];
 
 const openings = [
-  { title: "U10-U12 Academy Coach", description: "Year-round position", applyHref: "mailto:info@blythewoodsoccer.com" },
-  { title: "Goalkeeper Trainer", description: "Part-time, weekends", applyHref: "mailto:info@blythewoodsoccer.com" },
+  { title: "U10-U12 Academy Coach", description: "Year-round position", applyHref: `mailto:${contactConfig.email}` },
+  { title: "Goalkeeper Trainer", description: "Part-time, weekends", applyHref: `mailto:${contactConfig.email}` },
 ];
 
 const tryoutInfo = {
