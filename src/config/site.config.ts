@@ -25,22 +25,24 @@ export const heroSlides: HeroSlide[] = [
     image: "/images/night-field.png",
     ctaLabel: "See Current Updates",
     ctaHref: "/news/",
-    secondaryCtaLabel: "Start Registration",
-    secondaryCtaHref: linksConfig.clubRegistration,
+    secondaryCtaLabel: "Register For MLS GO",
+    secondaryCtaHref: linksConfig.recreationalRegistration,
   },
   {
     id: "evaluations",
-    eyebrow: "Tryouts & Evaluations",
-    title: "Player evaluations registration is open.",
-    body: "Open to all competitive players.",
+    eyebrow: "Competitive Programs",
+    title: "Interested in Junior Academy or Select?",
+    body:
+      "Reach out to the club for more information about competitive pathways, placement options, and how to get started.",
     image: "/images/evaluations-2026-team-huddle.jpg",
-    ctaLabel: "Register Now",
-    ctaHref: linksConfig.evaluations,
+    ctaLabel: "Contact the Club",
+    ctaHref: linksConfig.contact,
     details: [
-      { label: "Date", value: "May 16th" },
-      { label: "Time", value: "10:00 AM - 12:00 PM" },
-      { label: "Who", value: "All competitive players" },
+      { label: "Programs", value: "Junior Academy & Select" },
+      { label: "Next step", value: "Contact the club for details" },
     ],
+    secondaryCtaLabel: "Learn More",
+    secondaryCtaHref: "/programs/junior-academy/",
   },
   {
     id: "academy",
@@ -49,45 +51,54 @@ export const heroSlides: HeroSlide[] = [
     body:
       "Players train in a structured environment with strong coaching, league play, and year-round development.",
     image: "/images/select-action.jpg",
-    ctaLabel: "View Evaluations",
-    ctaHref: linksConfig.evaluations,
+    ctaLabel: "Contact the Club",
+    ctaHref: linksConfig.contact,
     secondaryCtaLabel: "Explore Junior Academy",
     secondaryCtaHref: "/programs/junior-academy/",
   },
   {
     id: "recreation",
     eyebrow: "MLS GO Recreation",
-    title: "MLS GO Recreation for new and returning players.",
+    title: "Fall MLS GO registration is $110.",
     body:
-      "A local recreational program with official MLS GO gear, clear season dates, and a fun environment for families.",
+      "We lowered Fall 2026 registration from $135 to $110 so more families can join. Practices and games begin the week of August 17 at Richland County Wellness Center with Coerver training and Friday night games.",
     image: "/images/recreation-family.png",
-    ctaLabel: "Register For Recreation",
+    ctaLabel: "Register For MLS GO",
     ctaHref: linksConfig.recreationalRegistration,
-    secondaryCtaLabel: "See Current News",
-    secondaryCtaHref: "/news/",
+    details: [
+      { label: "Regular registration", value: "June 11 – Aug 10 · $110" },
+      { label: "Season begins", value: "Week of August 17, 2026" },
+      { label: "Location", value: "Richland County Wellness Center" },
+    ],
+    secondaryCtaLabel: "Explore Recreation",
+    secondaryCtaHref: "/programs/recreational/",
   },
 ];
 
+export const heroCarouselSlides: HeroSlide[] = heroSlides.filter((slide) =>
+  ["evaluations", "recreation"].includes(slide.id),
+);
+
 export const heroAnnouncements: HeroAnnouncement[] = [
   {
-    id: "evaluations-open",
-    status: "Open now",
-    label: "Player Evaluations",
-    title: "May competitive evaluations are live.",
+    id: "evaluations-info",
+    status: "Learn more",
+    label: "Competitive Programs",
+    title: "Junior Academy and Select pathways.",
     description:
-      "Register for the current evaluation window for Junior Academy and Select teams.",
-    href: linksConfig.evaluations,
-    ctaLabel: "View Evaluations",
+      "Contact the club for more information about competitive programs, placement options, and next steps.",
+    href: linksConfig.contact,
+    ctaLabel: "Contact the Club",
   },
   {
     id: "recreation-live",
     status: "Registration live",
     label: "MLS GO Recreation",
-    title: "Spring recreation registration is active.",
+    title: "Fall 2026 MLS GO registration is $110.",
     description:
-      "Recreation is open now with official MLS GO gear, a family-first setup, and a clear seasonal calendar.",
+      "Registration is reduced from $135 to $110. Regular registration runs June 11 through August 10, with practices and games beginning the week of August 17 at RCWC.",
     href: linksConfig.recreationalRegistration,
-    ctaLabel: "Register For Recreation",
+    ctaLabel: "Register For MLS GO",
   },
   {
     id: "club-updates",

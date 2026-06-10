@@ -44,6 +44,11 @@ export type ProgramFeeRow = {
   seasons: string;
 };
 
+export type ProgramSeasonDetail = {
+  label: string;
+  value: string;
+};
+
 export type ProgramPage = {
   slug: "junior-academy" | "select" | "recreational";
   title: string;
@@ -57,6 +62,7 @@ export type ProgramPage = {
   scheduleDetails: string[];
   howToStart: string[];
   seasonLabel?: string;
+  seasonTimeline?: ProgramSeasonDetail[];
   ageBreakdown?: ProgramAgeGroup[];
   feeRows?: ProgramFeeRow[];
   feeNotes?: string[];

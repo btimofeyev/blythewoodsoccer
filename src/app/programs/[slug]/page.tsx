@@ -2,10 +2,12 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { programsConfig, getProgramBySlug } from "@/config/programs.config";
+import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { buildMetadata } from "@/lib/metadata";
+import { cn } from "@/lib/utils";
 
 type ProgramPageProps = {
   params: Promise<{ slug: string }>;
@@ -149,34 +151,43 @@ export default async function ProgramDetailPage({ params }: ProgramPageProps) {
         </div>
       </section>
 
-      {program.ageBreakdown?.length && program.feeRows?.length ? (
+      {program.feeRows?.length ? (
         <section className="border-t border-white/10 bg-[var(--color-bg)] py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 sm:px-8 lg:grid-cols-[0.88fr_1.12fr] lg:px-12">
-            <Reveal>
-              <div className="rounded-[2rem] border border-white/10 bg-[var(--color-surface)] p-7">
-                <p className="text-xs font-semibold tracking-[0.32em] uppercase text-[var(--color-accent)]">
-                  {program.seasonLabel} age breakdown
-                </p>
-                <h2 className="mt-4 font-display text-4xl leading-[0.92] text-white sm:text-5xl">
-                  {program.title} age groups
-                </h2>
-                <div className="mt-8 space-y-4">
-                  {program.ageBreakdown.map((group) => (
-                    <div
-                      key={group.label}
-                      className="flex flex-col gap-2 border-b border-white/10 pb-4 last:border-b-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
-                    >
-                      <p className="text-lg font-semibold text-white">
-                        {group.label}
-                      </p>
-                      <p className="text-sm leading-6 text-[var(--color-text-muted)] sm:text-right">
-                        {group.birthYears}
-                      </p>
-                    </div>
-                  ))}
+          <div
+            className={cn(
+              "mx-auto grid max-w-7xl gap-10 px-6 sm:px-8 lg:px-12",
+              program.ageBreakdown?.length || program.seasonTimeline?.length
+                ? "lg:grid-cols-[0.88fr_1.12fr]"
+                : "max-w-4xl lg:grid-cols-1",
+            )}
+          >
+            {program.ageBreakdown?.length || program.seasonTimeline?.length ? (
+              <Reveal>
+                <div className="rounded-[2rem] border border-white/10 bg-[var(--color-surface)] p-7">
+                  <p className="text-xs font-semibold tracking-[0.32em] uppercase text-[var(--color-accent)]">
+                    {program.seasonLabel} {program.ageBreakdown?.length ? "age breakdown" : "season info"}
+                  </p>
+                  <h2 className="mt-4 font-display text-4xl leading-[0.92] text-white sm:text-5xl">
+                    {program.ageBreakdown?.length
+                      ? `${program.title} age groups`
+                      : `${program.title} season details`}
+                  </h2>
+                  <div className="mt-8 space-y-4">
+                    {(program.ageBreakdown ?? program.seasonTimeline ?? []).map((item) => (
+                      <div
+                        key={item.label}
+                        className="flex flex-col gap-2 border-b border-white/10 pb-4 last:border-b-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+                      >
+                        <p className="text-lg font-semibold text-white">{item.label}</p>
+                        <p className="text-sm leading-6 text-[var(--color-text-muted)] sm:text-right">
+                          {"birthYears" in item ? item.birthYears : item.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            ) : null}
 
             <Reveal delay={0.08}>
               <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[var(--color-surface)]">
@@ -363,15 +374,17 @@ export default async function ProgramDetailPage({ params }: ProgramPageProps) {
                 Registration
               </p>
               <h2 className="mt-4 font-display text-4xl leading-[0.92] text-white sm:text-6xl">
-                Use the current registration link and check club updates.
+                {program.slug === "recreational"
+                  ? "Register for the current MLS GO season."
+                  : "Contact the club to learn about placement and next steps."}
               </h2>
             </div>
           </Reveal>
           <Reveal delay={0.08}>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <LinkButton href={program.primaryCtaHref} className="w-full sm:w-auto">
+              <CtaButton href={program.primaryCtaHref} className="w-full sm:w-auto">
                 {program.primaryCtaLabel}
-              </LinkButton>
+              </CtaButton>
               <LinkButton href="/news/" variant="secondary" className="w-full sm:w-auto">
                 Club updates
               </LinkButton>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { linksConfig } from "@/config/links.config";
+import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
@@ -26,8 +27,8 @@ export default async function NewsPage() {
         title="Club news, registration dates, and season updates."
         body="Find evaluation dates, registration windows, and announcements for Blythewood Soccer Club families."
         image="/images/evaluations-hero.jpg"
-        primaryCta={{ label: "Club Registration", href: linksConfig.clubRegistration }}
-        secondaryCta={{ label: "Log In", href: linksConfig.login }}
+        primaryCta={{ label: "Register for MLS GO", href: linksConfig.recreationalRegistration }}
+        secondaryCta={{ label: "Contact for Competitive", href: linksConfig.contact }}
       />
 
       <section className="border-t border-white/10 bg-[var(--color-bg)] py-24">

@@ -1,9 +1,9 @@
 import Link from "next/link";
 
+import { QuickLinksList } from "@/components/quick-links-list";
 import { linksConfig } from "@/config/links.config";
 import { programsConfig } from "@/config/programs.config";
 import { siteConfig } from "@/config/site.config";
-import { isExternalHref } from "@/lib/utils";
 
 export function SiteFooter() {
   return (
@@ -62,26 +62,16 @@ export function SiteFooter() {
           <h2 className="text-sm font-semibold tracking-[0.24em] uppercase text-white">
             Quick Links
           </h2>
-          <ul className="mt-4 space-y-2 text-sm text-[var(--color-text-muted)]">
-              {[
-                { label: "Current Updates", href: "/news/" },
-                { label: "Fields", href: "/fields/" },
-                { label: "About", href: "/about/" },
-                { label: "Start Registration", href: linksConfig.clubRegistration },
-                { label: "Log In", href: linksConfig.login },
-              ].map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="hover:text-white"
-                  target={isExternalHref(item.href) ? "_blank" : undefined}
-                  rel={isExternalHref(item.href) ? "noreferrer" : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <QuickLinksList
+            items={[
+              { label: "Current Updates", href: "/news/" },
+              { label: "Fields", href: "/fields/" },
+              { label: "About", href: "/about/" },
+              { label: "Register for MLS GO", href: linksConfig.recreationalRegistration },
+              { label: "Contact for Competitive", href: linksConfig.contact },
+              { label: "Log In", href: linksConfig.login },
+            ]}
+          />
         </div>
       </div>
 

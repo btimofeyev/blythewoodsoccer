@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { programsConfig } from "@/config/programs.config";
-import { heroSlides, siteConfig } from "@/config/site.config";
+import { heroCarouselSlides, siteConfig } from "@/config/site.config";
+import { linksConfig } from "@/config/links.config";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
@@ -17,7 +19,7 @@ export default async function Home() {
 
   return (
     <>
-      <HeroCarousel slides={heroSlides} />
+      <HeroCarousel slides={heroCarouselSlides} />
 
       <section className="relative border-t border-white/10 bg-[var(--color-bg)] py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--color-accent-glow),transparent_30%),radial-gradient(circle_at_bottom_right,var(--color-accent-soft),transparent_42%)]" />
@@ -182,20 +184,19 @@ export default async function Home() {
                 Ready to get started?
               </h2>
               <p className="mt-5 text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
-                Use the registration link to get started or visit the news page for current dates and updates.
+                Register for MLS GO recreation or contact the club about Junior Academy and Select
+                programs.
               </p>
             </div>
           </Reveal>
           <Reveal delay={0.08}>
             <div className="flex flex-wrap gap-3">
-              <LinkButton
-                href={siteConfig.heroSlides[0].secondaryCtaHref ?? siteConfig.heroSlides[0].ctaHref}
-              >
-                Start Registration
+              <LinkButton href={linksConfig.recreationalRegistration}>
+                Register for MLS GO
               </LinkButton>
-              <LinkButton href="/news/" variant="secondary">
-                Current updates
-              </LinkButton>
+              <CtaButton href={linksConfig.contact} variant="secondary">
+                Contact for Competitive
+              </CtaButton>
             </div>
           </Reveal>
         </div>

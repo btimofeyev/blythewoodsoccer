@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { LinkButton } from "@/components/link-button";
+import { CtaButton } from "@/components/cta-button";
 
 type PageHeroProps = {
   eyebrow: string;
@@ -50,18 +50,18 @@ export function PageHero({
           {primaryCta || secondaryCta ? (
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {primaryCta ? (
-                <LinkButton href={primaryCta.href} className="w-full sm:w-auto">
+                <CtaButton href={primaryCta.href} className="w-full sm:w-auto">
                   {primaryCta.label}
-                </LinkButton>
+                </CtaButton>
               ) : null}
               {secondaryCta ? (
-                <LinkButton
+                <CtaButton
                   href={secondaryCta.href}
                   variant="secondary"
                   className="w-full sm:w-auto"
                 >
                   {secondaryCta.label}
-                </LinkButton>
+                </CtaButton>
               ) : null}
             </div>
           ) : null}

@@ -32,9 +32,9 @@ export const programsConfig: ProgramPage[] = [
       "If a roster spot is not available, the club will help families find another option.",
     ],
     howToStart: [
-      "Submit the current player evaluation form through PlayMetrics.",
-      "Attend the evaluation window and watch for placement communication from the club.",
-      "Complete team registration once a roster fit is confirmed.",
+      "Contact the club to share your player's age, experience, and program interest.",
+      "Club staff will follow up with placement options and next steps.",
+      "Complete team registration in PlayMetrics once a roster fit is confirmed.",
     ],
     seasonLabel: "2026-2027",
     ageBreakdown: [
@@ -80,8 +80,8 @@ export const programsConfig: ProgramPage[] = [
           "Yes. The Academy is a good fit for players moving from recreation into a more structured competitive environment.",
       },
     ],
-    primaryCtaLabel: "View Evaluations",
-    primaryCtaHref: linksConfig.evaluations,
+    primaryCtaLabel: "Contact the Club",
+    primaryCtaHref: linksConfig.contact,
     secondaryCtaLabel: "Log In",
     secondaryCtaHref: linksConfig.login,
   },
@@ -115,9 +115,9 @@ export const programsConfig: ProgramPage[] = [
       "Select teams are built for players who want consistent competition and a higher training standard.",
     ],
     howToStart: [
-      "Review the current evaluation path before expecting a roster opening.",
-      "Attend the club evaluation window so coaches can assess fit and availability.",
-      "Move into PlayMetrics registration once the club confirms the right team environment.",
+      "Contact the club to discuss your player's age group, experience, and team interest.",
+      "Club staff will follow up about roster availability and the right team environment.",
+      "Move into PlayMetrics registration once the club confirms the right team fit.",
     ],
     seasonLabel: "2026-2027",
     ageBreakdown: [
@@ -170,8 +170,8 @@ export const programsConfig: ProgramPage[] = [
           "Use the Select registration path or come through the club evaluation process so coaches can assess fit and roster availability.",
       },
     ],
-    primaryCtaLabel: "View Evaluations",
-    primaryCtaHref: linksConfig.evaluations,
+    primaryCtaLabel: "Contact the Club",
+    primaryCtaHref: linksConfig.contact,
     secondaryCtaLabel: "Log In",
     secondaryCtaHref: linksConfig.login,
   },
@@ -180,56 +180,92 @@ export const programsConfig: ProgramPage[] = [
     title: "Recreational Soccer",
     ageBand: "MLS GO",
     summary:
-      "A welcoming, professionally supported environment for players of all experience levels who want to learn, compete, and enjoy the game.",
+      "Fall 2026 MLS GO registration is $110—reduced from $135—so more families can access quality recreational soccer with official MLS gear and Coerver-led training.",
     heroImage: "/images/recreation-family.png",
     intro:
-      "Blythewood recreational soccer keeps the barrier to entry low and the experience high. Families get a fun, organized league environment with real coaching support, official MLS GO gear, and a clear seasonal rhythm.",
+      "Blythewood MLS GO keeps recreational soccer affordable, organized, and fun. Families get one-hour Coerver practices focused on skills and technical ability, Friday night games, and official MLS team uniforms included with every registration—all at Richland County Wellness Center.",
     forPlayers: [
       "First-time players who want a positive introduction to the game.",
       "Returning families looking for a lower-pressure seasonal league with strong organization.",
       "Players of different experience levels who want to stay local and keep soccer fun.",
     ],
     highlights: [
-      "Open to all skill levels, from first-time players to young athletes building confidence.",
-      "Official MLS GO uniforms and age-appropriate equipment supported by Major League Soccer’s youth rec platform.",
-      "A Charlotte FC ticket benefit for registered players, with discounted family ticket access when available.",
+      "Regular registration is $110 for Fall 2026—a $25 reduction from the previous $135 fee so more families can participate.",
+      "Full MLS team uniform included with every registration: shirt, shorts, and socks from an MLS club.",
+      "One Charlotte FC ticket per registered child, with discounted family ticket options when available.",
     ],
     developmentPoints: [
-      "Training support powered by Coerver Carolinas and a positive, engaging technical model.",
-      "A strong emphasis on confidence, teamwork, and love of the game over pressure or early specialization.",
-      "Financial support may be available through the MLS GO Play Fund for qualifying families.",
+      "One-hour Coerver Carolinas practice sessions focused on skills, ball mastery, and technical ability.",
+      "Practice times at 5, 6, or 7 PM on Tuesday, Wednesday, and Thursday.",
+      "Friday night games keep the weekly rhythm family-friendly while players build confidence on the field.",
     ],
     scheduleDetails: [
-      "Season timelines and registration windows are posted in the club news section.",
-      "The program transitions from practices into game play once teams and coaches are formed.",
-      "Families should register early because uniform and league deadlines create hard close dates.",
+      "Registration runs June 11 through August 10, 2026 at the regular $110 rate.",
+      "Late registration is available August 10 through August 17, 2026 at $130.",
+      "Practices and games begin the week of August 17, 2026, with the last game on October 2, 2026.",
+      "All sessions are held at Richland County Wellness Center, 306 Flora Dr, Columbia, SC 29223.",
     ],
     howToStart: [
-      "Use the current recreation registration link while the season window is open.",
-      "Watch for coach, practice, and calendar communication through PlayMetrics.",
-      "Arrive ready for a family-friendly season built around learning, confidence, and fun.",
+      "Register through the MLS GO PlayMetrics link while the current registration window is open.",
+      "Watch for team, practice time, and calendar communication through PlayMetrics.",
+      "Arrive at RCWC ready for Coerver-led practices and Friday night games.",
+    ],
+    seasonLabel: "Fall 2026",
+    seasonTimeline: [
+      { label: "Regular registration", value: "June 11 – August 10, 2026 · $110" },
+      { label: "Late registration", value: "August 10 – August 17, 2026 · $130" },
+      { label: "Practices & games begin", value: "Week of August 17, 2026" },
+      { label: "Last game", value: "October 2, 2026" },
+      { label: "Location", value: "Richland County Wellness Center, 306 Flora Dr, Columbia, SC 29223" },
+      { label: "Practices", value: "Tue–Thu · 1-hour Coerver sessions at 5, 6, or 7 PM" },
+      { label: "Games", value: "Friday nights" },
+    ],
+    feeRows: [
+      {
+        format: "Regular registration",
+        ageGroups: "June 11 – August 10, 2026",
+        fee: "$110",
+        seasons: "Fall 2026",
+      },
+      {
+        format: "Late registration",
+        ageGroups: "August 10 – August 17, 2026",
+        fee: "$130",
+        seasons: "Fall 2026",
+      },
+    ],
+    feeNotes: [
+      "Fall 2026 registration is $110—reduced from $135—so more families can join MLS GO recreational soccer.",
+      "Registration includes the seasonal league experience and a full MLS team uniform: shirt, shorts, and socks.",
+      "Each registered player receives one ticket to a Charlotte FC home match.",
+      "Financial support may be available through the MLS GO Play Fund for qualifying families.",
     ],
     faq: [
       {
-        question: "Is recreational soccer only for beginners?",
+        question: "Why is registration $110 this season?",
         answer:
-          "No. The program is open to all skill levels and works well for both new players and returning families.",
+          "Blythewood lowered Fall 2026 MLS GO registration from $135 to $110 so more families can access the program without sacrificing quality coaching, uniforms, or the full seasonal experience.",
       },
       {
         question: "What does registration include?",
         answer:
-          "Registration covers the seasonal league experience and official MLS GO player gear. Specific seasonal pricing and timing can be updated through the content files.",
+          "Registration covers the Fall 2026 league experience, one-hour Coerver practice sessions, Friday night games, a full MLS team uniform (shirt, shorts, and socks), and one Charlotte FC ticket per registered child.",
       },
       {
-        question: "How do families know when seasons open?",
+        question: "When and where do practices and games happen?",
         answer:
-          "The club posts registration dates and season updates on the homepage and news page.",
+          "Practices and games begin the week of August 17, 2026 at Richland County Wellness Center (306 Flora Dr, Columbia, SC 29223). Coerver practices run Tuesday through Thursday at 5, 6, or 7 PM, and games are played on Friday nights. The last game of the season is October 2, 2026.",
+      },
+      {
+        question: "When can families register?",
+        answer:
+          "Regular registration runs June 11 through August 10, 2026 at $110. Late registration runs August 10 through August 17, 2026 at $130.",
       },
     ],
-    primaryCtaLabel: "Register For Recreation",
+    primaryCtaLabel: "Register For MLS GO",
     primaryCtaHref: linksConfig.recreationalRegistration,
-    secondaryCtaLabel: "See Current Updates",
-    secondaryCtaHref: "/news/",
+    secondaryCtaLabel: "View Location",
+    secondaryCtaHref: "/fields/",
   },
 ];
 

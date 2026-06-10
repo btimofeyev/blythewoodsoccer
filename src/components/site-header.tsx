@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 
+import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
 import { linksConfig } from "@/config/links.config";
 import { mainNav } from "@/config/site.config";
@@ -135,8 +136,8 @@ export function SiteHeader() {
           >
             Log In
           </Link>
-          <LinkButton href={linksConfig.clubRegistration} className="min-h-10 px-4 py-2">
-            Start Registration
+          <LinkButton href={linksConfig.recreationalRegistration} className="min-h-10 px-4 py-2">
+            Register for MLS GO
           </LinkButton>
         </div>
 
@@ -156,20 +157,20 @@ export function SiteHeader() {
           <div className="mx-auto max-h-[calc(100svh-5rem)] max-w-7xl overflow-y-auto overscroll-contain px-6 py-5 sm:px-8">
             <div className="mb-4 grid gap-3">
               <LinkButton
-                href={linksConfig.clubRegistration}
+                href={linksConfig.recreationalRegistration}
                 className="w-full"
                 onClick={closeMenu}
               >
-                Start Registration
+                Register for MLS GO
               </LinkButton>
-              <LinkButton
-                href="/news/"
+              <CtaButton
+                href={linksConfig.contact}
                 variant="secondary"
                 className="w-full"
                 onClick={closeMenu}
               >
-                Current Updates
-              </LinkButton>
+                Contact for Competitive
+              </CtaButton>
             </div>
             <div className="space-y-2">
               {mainNav.map((item) => {

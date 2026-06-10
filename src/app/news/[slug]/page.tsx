@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { linksConfig } from "@/config/links.config";
+import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
 import { getAllNewsPosts, getNewsPostBySlug } from "@/lib/content";
 import { buildMetadata } from "@/lib/metadata";
@@ -124,16 +125,16 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
               Club links
             </p>
             <p className="mt-3 text-lg leading-8 text-white">
-              Use the current registration link or log in to PlayMetrics.
+              Register for MLS GO or contact the club about competitive programs.
             </p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-            <LinkButton href={linksConfig.clubRegistration} className="w-full sm:w-auto">
-              Club Registration
+            <LinkButton href={linksConfig.recreationalRegistration} className="w-full sm:w-auto">
+              Register for MLS GO
             </LinkButton>
-            <LinkButton href={linksConfig.login} variant="secondary" className="w-full sm:w-auto">
-              Log In
-            </LinkButton>
+            <CtaButton href={linksConfig.contact} variant="secondary" className="w-full sm:w-auto">
+              Contact for Competitive
+            </CtaButton>
           </div>
         </div>
       </section>

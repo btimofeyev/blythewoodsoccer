@@ -2,9 +2,9 @@ import type { FieldLocation } from "@/lib/types";
 
 export const fieldsConfig: FieldLocation[] = [
   {
-    name: "RCWC",
-    address: ["306 Flora Drive", "Columbia, SC 29223"],
-    mapsHref: "https://maps.google.com?q=306%20Flora%20Drive,%20Columbia,%20SC%2029223",
+    name: "Richland County Wellness Center",
+    address: ["306 Flora Dr", "Columbia, SC 29223"],
+    mapsHref: "https://maps.google.com?q=306%20Flora%20Dr,%20Columbia,%20SC%2029223",
     statusHref: "https://www.blythewoodsoccer.com/",
     image: "/images/night-field.png",
     fieldMapLabel: "Field map available at the complex",

@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { linksConfig } from "@/config/links.config";
 import { siteConfig } from "@/config/site.config";
+import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
@@ -23,8 +24,8 @@ export default function AboutPage() {
         title="A local club focused on player development, strong coaching, and community."
         body="Blythewood Soccer Club gives families a welcoming place to play, train, and grow in the game."
         image="/images/night-field.png"
-        primaryCta={{ label: "Start Registration", href: linksConfig.clubRegistration }}
-        secondaryCta={{ label: "Log In", href: linksConfig.login }}
+        primaryCta={{ label: "Register for MLS GO", href: linksConfig.recreationalRegistration }}
+        secondaryCta={{ label: "Contact for Competitive", href: linksConfig.contact }}
       />
 
       <section className="border-t border-white/10 bg-[var(--color-bg)] py-24">
@@ -134,12 +135,12 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.08}>
             <div className="flex flex-wrap gap-3">
-              <LinkButton href={linksConfig.clubRegistration}>
-                Start registration
+              <LinkButton href={linksConfig.recreationalRegistration}>
+                Register for MLS GO
               </LinkButton>
-              <LinkButton href="/news/" variant="secondary">
-                Latest updates
-              </LinkButton>
+              <CtaButton href={linksConfig.contact} variant="secondary">
+                Contact for Competitive
+              </CtaButton>
             </div>
           </Reveal>
         </div>
