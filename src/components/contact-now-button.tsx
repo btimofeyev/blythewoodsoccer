@@ -11,6 +11,7 @@ type ContactNowButtonProps = {
   subject?: string;
   variant?: "primary" | "secondary" | "ghost";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onContactRequest?: (subject?: string) => void;
 };
 
 const variants = {
@@ -28,6 +29,7 @@ export function ContactNowButton({
   subject,
   variant = "primary",
   onClick,
+  onContactRequest,
 }: ContactNowButtonProps) {
   const [open, setOpen] = useState(false);
 
@@ -42,12 +44,18 @@ export function ContactNowButton({
         )}
         onClick={(event) => {
           onClick?.(event);
+          if (onContactRequest) {
+            onContactRequest(subject);
+            return;
+          }
           setOpen(true);
         }}
       >
         {children}
       </button>
-      <ContactFormDialog open={open} onOpenChange={setOpen} subject={subject} />
+      {onContactRequest ? null : (
+        <ContactFormDialog open={open} onOpenChange={setOpen} subject={subject} />
+      )}
     </>
   );
 }

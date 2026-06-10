@@ -5,6 +5,8 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { CtaButton } from "@/components/cta-button";
+import { ContactFormDialog } from "@/components/contact-form-dialog";
+import { contactConfig } from "@/config/contact.config";
 import type { HeroSlide } from "@/lib/types";
 
 type HeroCarouselProps = {
@@ -16,10 +18,17 @@ const AUTO_ADVANCE_MS = 7000;
 export function HeroCarousel({ slides }: HeroCarouselProps) {
   const safeSlides = slides.filter(Boolean);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [contactSubject, setContactSubject] = useState<string>(contactConfig.defaultSubject);
   const activeSlide = safeSlides[activeIndex] ?? safeSlides[0];
 
+  function handleContactRequest(subject?: string) {
+    setContactSubject(subject ?? contactConfig.defaultSubject);
+    setContactOpen(true);
+  }
+
   useEffect(() => {
-    if (safeSlides.length <= 1) {
+    if (safeSlides.length <= 1 || contactOpen) {
       return;
     }
 
@@ -28,7 +37,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
     }, AUTO_ADVANCE_MS);
 
     return () => window.clearInterval(interval);
-  }, [safeSlides.length]);
+  }, [contactOpen, safeSlides.length]);
 
   if (!activeSlide) {
     return null;
@@ -40,6 +49,11 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       aria-label="Club hero"
       aria-roledescription="carousel"
     >
+      <ContactFormDialog
+        open={contactOpen}
+        onOpenChange={setContactOpen}
+        subject={contactSubject}
+      />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--color-accent-glow),transparent_28%),radial-gradient(circle_at_bottom_right,var(--color-accent-soft),transparent_36%)]" />
 
       <div className="relative mx-auto max-w-7xl px-6 pb-16 sm:px-8 lg:px-12">
@@ -88,6 +102,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
                     <CtaButton
                       href={activeSlide.ctaHref}
                       subject={activeSlide.contactSubject}
+                      onContactRequest={handleContactRequest}
                       className="w-full sm:w-auto"
                     >
                       {activeSlide.ctaLabel}

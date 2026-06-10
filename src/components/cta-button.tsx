@@ -11,6 +11,7 @@ type CtaButtonProps = {
   className?: string;
   subject?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
+  onContactRequest?: (subject?: string) => void;
 };
 
 export function CtaButton({
@@ -20,6 +21,7 @@ export function CtaButton({
   className,
   subject = contactConfig.defaultSubject,
   onClick,
+  onContactRequest,
 }: CtaButtonProps) {
   if (isContactFormHref(href)) {
     return (
@@ -28,6 +30,7 @@ export function CtaButton({
         className={className}
         subject={subject}
         onClick={onClick}
+        onContactRequest={onContactRequest}
       >
         {children}
       </ContactNowButton>
