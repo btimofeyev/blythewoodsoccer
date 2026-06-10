@@ -85,7 +85,11 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
                   ) : null}
 
                   <div className="mt-8 flex flex-wrap gap-3">
-                    <CtaButton href={activeSlide.ctaHref} className="w-full sm:w-auto">
+                    <CtaButton
+                      href={activeSlide.ctaHref}
+                      subject={activeSlide.contactSubject}
+                      className="w-full sm:w-auto"
+                    >
                       {activeSlide.ctaLabel}
                     </CtaButton>
                     {activeSlide.secondaryCtaHref && activeSlide.secondaryCtaLabel ? (

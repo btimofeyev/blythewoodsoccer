@@ -59,9 +59,9 @@ export const heroSlides: HeroSlide[] = [
   {
     id: "recreation",
     eyebrow: "MLS GO Recreation",
-    title: "Fall MLS GO registration is $110.",
+    title: "Fall MLS GO registration is open.",
     body:
-      "We lowered Fall 2026 registration from $135 to $110 so more families can join. Practices and games begin the week of August 17 at Richland County Wellness Center with Coerver training and Friday night games.",
+      "Register for Fall 2026 MLS GO recreational soccer. Practices and games begin the week of August 17 at Richland County Wellness Center with Coerver training and Friday night games.",
     image: "/images/recreation-family.png",
     ctaLabel: "Register For MLS GO",
     ctaHref: linksConfig.recreationalRegistration,
@@ -73,10 +73,28 @@ export const heroSlides: HeroSlide[] = [
     secondaryCtaLabel: "Explore Recreation",
     secondaryCtaHref: "/programs/recreational/",
   },
+  {
+    id: "open-roles",
+    eyebrow: "Open Roles",
+    title: "We're looking for coaches and leaders.",
+    body:
+      "Blythewood is hiring coaches and welcoming volunteers who want to help lead the club. Open positions span recreation, academy, select, and club leadership.",
+    image: "/images/evaluations-2026-team-huddle.jpg",
+    ctaLabel: "Apply Now",
+    ctaHref: linksConfig.contact,
+    contactSubject: "Open Role Inquiry",
+    details: [
+      { label: "MLS GO Recreational Director", value: "Program leadership" },
+      { label: "Academy Team Coaches", value: "Junior Academy teams" },
+      { label: "Select Team Coaches", value: "Select-level teams" },
+      { label: "Treasurer", value: "Finance & budget oversight" },
+      { label: "Vice President", value: "Leadership & strategic support" },
+    ],
+  },
 ];
 
 export const heroCarouselSlides: HeroSlide[] = heroSlides.filter((slide) =>
-  ["evaluations", "recreation"].includes(slide.id),
+  ["evaluations", "recreation", "open-roles"].includes(slide.id),
 );
 
 export const heroAnnouncements: HeroAnnouncement[] = [
@@ -94,9 +112,9 @@ export const heroAnnouncements: HeroAnnouncement[] = [
     id: "recreation-live",
     status: "Registration live",
     label: "MLS GO Recreation",
-    title: "Fall 2026 MLS GO registration is $110.",
+    title: "Fall 2026 MLS GO registration is open.",
     description:
-      "Registration is reduced from $135 to $110. Regular registration runs June 11 through August 10, with practices and games beginning the week of August 17 at RCWC.",
+      "Regular registration runs June 11 through August 10, with practices and games beginning the week of August 17 at RCWC.",
     href: linksConfig.recreationalRegistration,
     ctaLabel: "Register For MLS GO",
   },

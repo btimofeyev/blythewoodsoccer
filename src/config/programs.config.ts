@@ -180,7 +180,7 @@ export const programsConfig: ProgramPage[] = [
     title: "Recreational Soccer",
     ageBand: "MLS GO",
     summary:
-      "Fall 2026 MLS GO registration is $110—reduced from $135—so more families can access quality recreational soccer with official MLS gear and Coerver-led training.",
+      "Fall 2026 MLS GO recreational soccer with official MLS gear, Coerver-led training, and Friday night games at Richland County Wellness Center.",
     heroImage: "/images/recreation-family.png",
     intro:
       "Blythewood MLS GO keeps recreational soccer affordable, organized, and fun. Families get one-hour Coerver practices focused on skills and technical ability, Friday night games, and official MLS team uniforms included with every registration—all at Richland County Wellness Center.",
@@ -190,7 +190,7 @@ export const programsConfig: ProgramPage[] = [
       "Players of different experience levels who want to stay local and keep soccer fun.",
     ],
     highlights: [
-      "Regular registration is $110 for Fall 2026—a $25 reduction from the previous $135 fee so more families can participate.",
+      "Open to all skill levels, from first-time players to young athletes building confidence.",
       "Full MLS team uniform included with every registration: shirt, shorts, and socks from an MLS club.",
       "One Charlotte FC ticket per registered child, with discounted family ticket options when available.",
     ],
@@ -235,16 +235,16 @@ export const programsConfig: ProgramPage[] = [
       },
     ],
     feeNotes: [
-      "Fall 2026 registration is $110—reduced from $135—so more families can join MLS GO recreational soccer.",
+      "Regular registration for Fall 2026 is $110 through August 10, 2026.",
       "Registration includes the seasonal league experience and a full MLS team uniform: shirt, shorts, and socks.",
       "Each registered player receives one ticket to a Charlotte FC home match.",
       "Financial support may be available through the MLS GO Play Fund for qualifying families.",
     ],
     faq: [
       {
-        question: "Why is registration $110 this season?",
+        question: "What are the registration fees?",
         answer:
-          "Blythewood lowered Fall 2026 MLS GO registration from $135 to $110 so more families can access the program without sacrificing quality coaching, uniforms, or the full seasonal experience.",
+          "Regular registration is $110 from June 11 through August 10, 2026. Late registration is $130 from August 10 through August 17, 2026.",
       },
       {
         question: "What does registration include?",

@@ -13,6 +13,7 @@ export type HeroSlide = {
   ctaLabel: string;
   ctaHref: string;
   details?: { label: string; value: string }[];
+  contactSubject?: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
 };
