@@ -57,6 +57,23 @@ export const heroSlides: HeroSlide[] = [
     secondaryCtaHref: "/programs/junior-academy/",
   },
   {
+    id: "world-cup-fantasy",
+    eyebrow: "World Cup 2026",
+    title: "Pick your squad. Play with BSC.",
+    body:
+      "The FIFA World Cup is here. Join our club fantasy league—build your team, set your captain, and compete with Blythewood families all tournament long.",
+    image: "/images/world-cup-fantasy-hero.jpg",
+    ctaLabel: "Join the League",
+    ctaHref: linksConfig.worldCupFantasyJoin,
+    details: [
+      { label: "League code", value: "JG3WHC6O" },
+      { label: "Your squad", value: "15 players · live subs & captaincy" },
+      { label: "Who it's for", value: "Fans and first-timers alike" },
+    ],
+    secondaryCtaLabel: "Strategy Guide",
+    secondaryCtaHref: linksConfig.worldCupFantasyStrategyGuide,
+  },
+  {
     id: "recreation",
     eyebrow: "MLS GO Recreation",
     title: "Fall MLS GO registration is open.",
@@ -93,11 +110,28 @@ export const heroSlides: HeroSlide[] = [
   },
 ];
 
-export const heroCarouselSlides: HeroSlide[] = heroSlides.filter((slide) =>
-  ["evaluations", "recreation", "open-roles"].includes(slide.id),
-);
+const heroCarouselSlideIds = [
+  "world-cup-fantasy",
+  "evaluations",
+  "recreation",
+  "open-roles",
+] as const;
+
+export const heroCarouselSlides: HeroSlide[] = heroCarouselSlideIds
+  .map((id) => heroSlides.find((slide) => slide.id === id))
+  .filter((slide): slide is HeroSlide => Boolean(slide));
 
 export const heroAnnouncements: HeroAnnouncement[] = [
+  {
+    id: "world-cup-fantasy",
+    status: "Join now",
+    label: "World Cup Fantasy",
+    title: "BSC World Cup Fantasy League is live.",
+    description:
+      "Build your squad, pick your captain, and follow the 2026 World Cup with Blythewood families. League code JG3WHC6O.",
+    href: linksConfig.worldCupFantasyJoin,
+    ctaLabel: "Join the League",
+  },
   {
     id: "evaluations-info",
     status: "Learn more",

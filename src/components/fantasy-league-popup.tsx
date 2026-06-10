@@ -1,23 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { X } from "lucide-react";
 
 import { fantasyLeagueConfig } from "@/config/fantasy-league.config";
-import { registrationConfig } from "@/config/registration.config";
 import { isFantasyLeagueWindowOpen } from "@/lib/fantasy-league";
-import { isRegistrationWindowOpen } from "@/lib/registration";
 import { isExternalHref } from "@/lib/utils";
 
-const OPEN_DELAY_MS = 800;
+const OPEN_DELAY_MS = 0;
 
-export function RegistrationPopup() {
+export function FantasyLeaguePopup() {
   const titleId = useId();
   const descriptionId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const { popup, sessionStorageKey } = registrationConfig;
+  const { popup, sessionStorageKey, leagueCode } = fantasyLeagueConfig;
 
   const dismiss = useCallback(() => {
     sessionStorage.setItem(sessionStorageKey, "1");
@@ -25,14 +24,7 @@ export function RegistrationPopup() {
   }, [sessionStorageKey]);
 
   useEffect(() => {
-    if (!isRegistrationWindowOpen()) {
-      return;
-    }
-
-    if (
-      isFantasyLeagueWindowOpen() &&
-      !sessionStorage.getItem(fantasyLeagueConfig.sessionStorageKey)
-    ) {
+    if (!isFantasyLeagueWindowOpen()) {
       return;
     }
 
@@ -76,6 +68,7 @@ export function RegistrationPopup() {
   }
 
   const primaryExternal = isExternalHref(popup.primaryCtaHref);
+  const secondaryExternal = isExternalHref(popup.secondaryCtaHref);
 
   return (
     <div
@@ -95,7 +88,7 @@ export function RegistrationPopup() {
       >
         <button
           type="button"
-          aria-label="Close registration popup"
+          aria-label="Close fantasy league popup"
           className="absolute right-5 top-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/70 transition hover:border-white/20 hover:text-white"
           onClick={dismiss}
         >
@@ -112,7 +105,25 @@ export function RegistrationPopup() {
           {popup.body}
         </p>
 
-        <dl className="mt-6 space-y-3 rounded-[1.5rem] border border-white/10 bg-[rgba(15,23,42,0.45)] p-5">
+        <div className="relative mt-5 aspect-[16/9] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[var(--color-surface)]">
+          <Image
+            src={popup.image}
+            alt=""
+            fill
+            unoptimized
+            className="object-cover"
+            sizes="(min-width: 640px) 512px, calc(100vw - 5rem)"
+          />
+        </div>
+
+        <div className="mt-6 rounded-[1.5rem] border border-[var(--color-accent)]/35 bg-[var(--color-accent-soft)] px-5 py-4 text-center">
+          <p className="text-xs font-semibold tracking-[0.28em] uppercase text-white/70">
+            League code
+          </p>
+          <p className="mt-2 font-display text-4xl tracking-[0.12em] text-white">{leagueCode}</p>
+        </div>
+
+        <dl className="mt-5 space-y-3 rounded-[1.5rem] border border-white/10 bg-[rgba(15,23,42,0.45)] p-5">
           {popup.details.map((detail) => (
             <div key={detail.label} className="grid gap-1 sm:grid-cols-[10rem_1fr]">
               <dt className="text-xs font-semibold tracking-[0.22em] uppercase text-white/60">
@@ -122,6 +133,21 @@ export function RegistrationPopup() {
             </div>
           ))}
         </dl>
+
+        <ul className="mt-5 space-y-2 rounded-[1.5rem] border border-white/10 bg-[rgba(15,23,42,0.32)] p-5">
+          {popup.tips.map((tip) => (
+            <li
+              key={tip}
+              className="flex gap-3 text-sm leading-6 text-[var(--color-text-muted)]"
+            >
+              <span
+                aria-hidden="true"
+                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]"
+              />
+              <span>{tip}</span>
+            </li>
+          ))}
+        </ul>
 
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
@@ -134,6 +160,8 @@ export function RegistrationPopup() {
           </Link>
           <Link
             href={popup.secondaryCtaHref}
+            target={secondaryExternal ? "_blank" : undefined}
+            rel={secondaryExternal ? "noreferrer" : undefined}
             className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-center text-sm font-semibold tracking-[0.18em] uppercase text-[var(--color-text-muted)] transition hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-strong)] hover:text-white"
             onClick={dismiss}
           >

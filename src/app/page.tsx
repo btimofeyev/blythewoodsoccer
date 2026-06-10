@@ -5,6 +5,7 @@ import { programsConfig } from "@/config/programs.config";
 import { heroCarouselSlides, siteConfig } from "@/config/site.config";
 import { linksConfig } from "@/config/links.config";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { FantasyLeaguePopup } from "@/components/fantasy-league-popup";
 import { RegistrationPopup } from "@/components/registration-popup";
 import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
@@ -20,6 +21,7 @@ export default async function Home() {
 
   return (
     <>
+      <FantasyLeaguePopup />
       <RegistrationPopup />
       <HeroCarousel slides={heroCarouselSlides} />
 
