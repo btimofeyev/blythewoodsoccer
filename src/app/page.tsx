@@ -5,6 +5,7 @@ import { programsConfig } from "@/config/programs.config";
 import { heroCarouselSlides, siteConfig } from "@/config/site.config";
 import { linksConfig } from "@/config/links.config";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { RegistrationPopup } from "@/components/registration-popup";
 import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
 import { Reveal } from "@/components/reveal";
@@ -19,6 +20,7 @@ export default async function Home() {
 
   return (
     <>
+      <RegistrationPopup />
       <HeroCarousel slides={heroCarouselSlides} />
 
       <section className="relative border-t border-white/10 bg-[var(--color-bg)] py-24">
