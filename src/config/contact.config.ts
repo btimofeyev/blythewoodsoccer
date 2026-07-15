@@ -1,5 +1,5 @@
 export const contactConfig = {
-  email: "blythewoodsoccerclub@gmail.com",
+  email: "info@blythewoodsoccer.com",
   formHref: "#contact",
   defaultSubject: "Competitive Program Inquiry",
   openRolesSubject: "Open Role Inquiry",
