@@ -3,7 +3,7 @@ import { linksConfig } from "@/config/links.config";
 export const registrationConfig = {
   windowStart: "2026-06-11",
   windowEnd: "2026-08-17",
-  sessionStorageKey: "blythewood-registration-popup-dismissed",
+  sessionStorageKey: "blythewood-fall-2026-registration-popup-dismissed-v2",
   popup: {
     eyebrow: "MLS GO Recreation",
     title: "Fall 2026 MLS GO registration is open.",

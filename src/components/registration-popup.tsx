@@ -4,9 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 
-import { fantasyLeagueConfig } from "@/config/fantasy-league.config";
 import { registrationConfig } from "@/config/registration.config";
-import { isFantasyLeagueWindowOpen } from "@/lib/fantasy-league";
 import { isRegistrationWindowOpen } from "@/lib/registration";
 import { isExternalHref } from "@/lib/utils";
 
@@ -26,13 +24,6 @@ export function RegistrationPopup() {
 
   useEffect(() => {
     if (!isRegistrationWindowOpen()) {
-      return;
-    }
-
-    if (
-      isFantasyLeagueWindowOpen() &&
-      !sessionStorage.getItem(fantasyLeagueConfig.sessionStorageKey)
-    ) {
       return;
     }
 

@@ -5,7 +5,6 @@ import { programsConfig } from "@/config/programs.config";
 import { heroCarouselSlides, siteConfig } from "@/config/site.config";
 import { linksConfig } from "@/config/links.config";
 import { HeroCarousel } from "@/components/hero-carousel";
-import { FantasyLeaguePopup } from "@/components/fantasy-league-popup";
 import { RegistrationPopup } from "@/components/registration-popup";
 import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
@@ -21,7 +20,6 @@ export default async function Home() {
 
   return (
     <>
-      <FantasyLeaguePopup />
       <RegistrationPopup />
       <HeroCarousel slides={heroCarouselSlides} />
 
@@ -174,6 +172,34 @@ export default async function Home() {
               </div>
             </div>
           ) : null}
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[var(--color-bg-alt)] py-16">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <Reveal>
+            <div className="grid items-center gap-8 border-y border-white/10 py-10 md:grid-cols-[0.7fr_1.3fr]">
+              <div>
+                <p className="text-xs font-semibold tracking-[0.34em] uppercase text-[var(--color-accent)]">
+                  Club Sponsor
+                </p>
+                <h2 className="mt-3 font-display text-4xl leading-none text-white sm:text-5xl">
+                  Supporting soccer in our community.
+                </h2>
+              </div>
+
+              <div className="flex min-h-36 items-center justify-center border-l-0 border-white/10 px-4 md:border-l md:px-10">
+                <Image
+                  src="/images/sponsors/sc-endodontics.svg"
+                  alt="SC Endodontics, LLC — Specialty Root Canal Treatment"
+                  width={504}
+                  height={683}
+                  unoptimized
+                  className="h-auto max-h-72 w-auto max-w-full"
+                />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
