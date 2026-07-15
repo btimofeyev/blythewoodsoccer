@@ -51,23 +51,23 @@ export function SiteHeader() {
           : "border-white/10 bg-[rgba(15,23,42,0.92)] backdrop-blur-xl",
       )}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between px-5 sm:h-20 sm:px-8 lg:px-12">
         <Link href="/" className="flex items-center gap-3" onClick={closeMenu}>
-          <div className="relative h-12 w-20">
+          <div className="relative h-10 w-16 sm:h-12 sm:w-20">
             <Image
               src="/images/logo.png"
-              alt="Blythewood Soccer Club"
+              alt=""
               fill
               className="object-contain"
               priority
               unoptimized
             />
           </div>
-          <div className="hidden sm:block">
-            <p className="font-display text-2xl leading-none text-white">
+          <div className="block">
+            <p className="font-display text-xl leading-none text-white sm:text-2xl">
               Blythewood
             </p>
-            <p className="text-[10px] font-semibold tracking-[0.32em] uppercase text-[var(--color-accent)]">
+            <p className="text-[9px] font-semibold tracking-[0.24em] uppercase text-[var(--color-accent)] sm:text-[10px] sm:tracking-[0.32em]">
               Soccer Club
             </p>
           </div>
@@ -144,8 +144,8 @@ export function SiteHeader() {
         <button
           type="button"
           aria-expanded={open}
-          aria-label="Toggle navigation"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white lg:hidden"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white transition active:scale-[0.96] lg:hidden"
           onClick={() => setOpen((value) => !value)}
         >
           {open ? <X size={18} /> : <Menu size={18} />}
@@ -153,9 +153,9 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <div className="border-t border-white/10 bg-[rgba(15,23,42,0.98)] lg:hidden">
-          <div className="mx-auto max-h-[calc(100svh-5rem)] max-w-7xl overflow-y-auto overscroll-contain px-6 py-5 sm:px-8">
-            <div className="mb-4 grid gap-3">
+        <div className="min-h-[calc(100dvh-4.25rem)] border-t border-white/10 bg-[rgba(15,23,42,0.98)] sm:min-h-[calc(100dvh-5rem)] lg:hidden">
+          <div className="mx-auto max-h-[calc(100dvh-4.25rem)] max-w-7xl overflow-y-auto overscroll-contain px-5 py-5 sm:max-h-[calc(100dvh-5rem)] sm:px-8">
+            <div className="mb-5 grid gap-3">
               <LinkButton
                 href={linksConfig.recreationalRegistration}
                 className="w-full"
@@ -172,15 +172,12 @@ export function SiteHeader() {
                 Contact for Competitive
               </CtaButton>
             </div>
-            <div className="space-y-2">
+            <div className="divide-y divide-white/10 border-y border-white/10">
               {mainNav.map((item) => {
                 if (item.children) {
                   return (
-                    <div
-                      key={item.label}
-                      className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] p-2"
-                    >
-                      <p className="px-3 py-2 text-xs font-semibold tracking-[0.24em] uppercase text-[var(--color-accent)]">
+                    <div key={item.label} className="py-2">
+                      <p className="px-1 py-2 text-[10px] font-semibold tracking-[0.24em] uppercase text-[var(--color-accent)]">
                         {item.label}
                       </p>
                       {item.children.map((child) => (
@@ -188,7 +185,7 @@ export function SiteHeader() {
                           key={child.href}
                           href={child.href}
                           onClick={closeMenu}
-                          className="block rounded-2xl px-3 py-3 text-base text-white"
+                          className="flex min-h-11 items-center rounded-xl px-1 text-base text-white transition active:bg-white/5"
                         >
                           {child.label}
                         </Link>
@@ -206,7 +203,7 @@ export function SiteHeader() {
                     key={item.href}
                     href={item.href}
                     onClick={closeMenu}
-                    className="block rounded-2xl border border-[var(--color-border)] px-4 py-3 text-base text-white"
+                    className="flex min-h-12 items-center py-3 text-base text-white transition active:translate-x-0.5"
                     target={isExternalHref(item.href) ? "_blank" : undefined}
                     rel={isExternalHref(item.href) ? "noreferrer" : undefined}
                   >
@@ -215,11 +212,11 @@ export function SiteHeader() {
                 );
               })}
             </div>
-            <div className="mt-4 border-t border-white/10 pt-4">
+            <div className="mt-2 border-b border-white/10">
               <Link
                 href={linksConfig.login}
                 onClick={closeMenu}
-                className="block rounded-2xl border border-[var(--color-border)] px-4 py-3 text-base text-white"
+                className="flex min-h-12 items-center py-3 text-base text-white"
                 target="_blank"
                 rel="noreferrer"
               >

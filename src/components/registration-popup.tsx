@@ -87,7 +87,7 @@ export function RegistrationPopup() {
         <button
           type="button"
           aria-label="Close registration popup"
-          className="absolute right-5 top-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/70 transition hover:border-white/20 hover:text-white"
+          className="absolute right-5 top-5 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white/70 transition hover:border-white/20 hover:text-white active:scale-[0.96]"
           onClick={dismiss}
         >
           <X size={18} />

@@ -8,6 +8,7 @@ import { HeroCarousel } from "@/components/hero-carousel";
 import { RegistrationPopup } from "@/components/registration-popup";
 import { CtaButton } from "@/components/cta-button";
 import { LinkButton } from "@/components/link-button";
+import { MobileRegistrationBar } from "@/components/mobile-registration-bar";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { getFeaturedNewsPosts } from "@/lib/content";
@@ -21,11 +22,12 @@ export default async function Home() {
   return (
     <>
       <RegistrationPopup />
+      <MobileRegistrationBar />
       <HeroCarousel slides={heroCarouselSlides} />
 
-      <section className="relative border-t border-white/10 bg-[var(--color-bg)] py-24">
+      <section className="relative border-t border-white/10 bg-[var(--color-bg)] py-14 lg:py-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--color-accent-glow),transparent_30%),radial-gradient(circle_at_bottom_right,var(--color-accent-soft),transparent_42%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Reveal>
             <SectionHeading
               eyebrow="Programs"
@@ -34,25 +36,25 @@ export default async function Home() {
             />
           </Reveal>
 
-          <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          <div className="mt-8 divide-y divide-white/10 border-y border-white/10 lg:mt-14 lg:grid lg:grid-cols-3 lg:gap-5 lg:divide-y-0 lg:border-y-0">
             {programsConfig.map((program, index) => (
               <Reveal key={program.slug} delay={index * 0.08}>
                 <Link
                   href={`/programs/${program.slug}/`}
-                  className="group flex h-full flex-col justify-between rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,var(--color-surface-strong),rgba(255,255,255,0.02))] p-7 transition duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:bg-[var(--color-surface-strong)]"
+                  className="group flex h-full flex-col justify-between py-5 transition duration-300 active:scale-[0.99] lg:rounded-[2rem] lg:border lg:border-white/10 lg:bg-[linear-gradient(180deg,var(--color-surface-strong),rgba(255,255,255,0.02))] lg:p-7 lg:hover:-translate-y-1 lg:hover:border-[var(--color-accent)] lg:hover:bg-[var(--color-surface-strong)]"
                 >
                   <div>
                     <p className="text-xs font-semibold tracking-[0.32em] uppercase text-[var(--color-accent)]">
                       {program.ageBand}
                     </p>
-                    <h2 className="mt-5 font-display text-5xl leading-[0.88] text-white">
+                    <h2 className="mt-3 font-display text-3xl leading-[0.9] text-white lg:mt-5 lg:text-5xl">
                       {program.title}
                     </h2>
-                    <p className="mt-4 text-base leading-7 text-[var(--color-text-muted)]">
+                    <p className="mt-2 line-clamp-2 text-[15px] leading-6 text-[var(--color-text-muted)] lg:mt-4 lg:line-clamp-none lg:text-base lg:leading-7">
                       {program.summary}
                     </p>
                   </div>
-                  <div className="mt-10 flex items-center justify-between text-sm font-semibold uppercase tracking-[0.22em] text-white/70">
+                  <div className="mt-4 flex min-h-11 items-center justify-between text-xs font-semibold uppercase tracking-[0.2em] text-white/70 lg:mt-10 lg:text-sm lg:tracking-[0.22em]">
                     <span>Explore program</span>
                     <span className="transition group-hover:text-[var(--color-accent)]">
                       →
@@ -65,8 +67,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-[var(--color-bg-alt)] py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:px-12">
+      <section className="border-t border-white/10 bg-[var(--color-bg-alt)] py-14 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:px-12">
           <Reveal>
             <SectionHeading
               eyebrow="Why Blythewood"
@@ -77,7 +79,7 @@ export default async function Home() {
 
           <Reveal delay={0.08}>
             <div className="grid gap-6 sm:grid-cols-[0.75fr_1.25fr]">
-              <div className="relative min-h-64 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(59,130,246,0.28),rgba(15,23,42,0.82))]">
+              <div className="relative hidden min-h-64 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(59,130,246,0.28),rgba(15,23,42,0.82))] sm:block">
                 <Image
                   src="/images/logo.png"
                   alt="Blythewood Soccer Club crest"
@@ -86,16 +88,16 @@ export default async function Home() {
                   className="object-contain p-8 opacity-90"
                 />
               </div>
-              <div className="space-y-5">
+              <div className="divide-y divide-white/10 border-y border-white/10 sm:space-y-5 sm:divide-y-0 sm:border-y-0">
                 {siteConfig.homeProofPoints.map((item) => (
                   <div
                     key={item.title}
-                    className="border-l border-[var(--color-accent)] pl-5"
+                    className="py-4 sm:border-l sm:border-[var(--color-accent)] sm:py-0 sm:pl-5"
                   >
                     <p className="text-xs font-semibold tracking-[0.24em] uppercase text-[var(--color-accent)]">
                       {item.title}
                     </p>
-                    <p className="mt-3 text-lg leading-8 text-white/88">{item.body}</p>
+                    <p className="mt-2 text-[15px] leading-6 text-white/88 sm:mt-3 sm:text-lg sm:leading-8">{item.body}</p>
                   </div>
                 ))}
               </div>
@@ -104,8 +106,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-[var(--color-bg)] py-24">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <section className="border-t border-white/10 bg-[var(--color-bg)] py-14 lg:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Reveal>
             <SectionHeading
               eyebrow="News & Events"
@@ -115,9 +117,9 @@ export default async function Home() {
           </Reveal>
 
           {leadUpdate ? (
-            <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="mt-8 grid gap-6 lg:mt-12 lg:grid-cols-[1.1fr_0.9fr]">
               <Reveal>
-                <article className="overflow-hidden rounded-[2rem] border border-white/10 bg-[var(--color-surface)]">
+                <article className="overflow-hidden border-y border-white/10 bg-[var(--color-surface)] sm:rounded-[2rem] sm:border">
                   <div className="relative aspect-[16/10]">
                     <Image
                       src={leadUpdate.coverImage}
@@ -127,7 +129,7 @@ export default async function Home() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="p-6 sm:p-8">
+                  <div className="px-0 py-5 sm:p-8">
                     <p className="text-xs font-semibold tracking-[0.26em] uppercase text-[var(--color-accent)]">
                       {leadUpdate.category ?? "Club News"} • {formatDate(leadUpdate.date)}
                     </p>
@@ -139,7 +141,7 @@ export default async function Home() {
                     </p>
                     <Link
                       href={`/news/${leadUpdate.slug}/`}
-                      className="mt-6 inline-flex text-sm font-semibold uppercase tracking-[0.24em] text-white hover:text-[var(--color-accent)]"
+                      className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold uppercase tracking-[0.24em] text-white hover:text-[var(--color-accent)] sm:mt-6"
                     >
                       Read update
                     </Link>
@@ -147,22 +149,22 @@ export default async function Home() {
                 </article>
               </Reveal>
 
-              <div className="grid gap-5">
+              <div className="divide-y divide-white/10 border-y border-white/10 lg:grid lg:gap-5 lg:divide-y-0 lg:border-y-0">
                 {supportingUpdates.map((post, index) => (
                   <Reveal key={post.slug} delay={index * 0.08}>
-                    <article className="rounded-[2rem] border border-white/10 bg-[var(--color-surface)] p-6">
+                    <article className="py-5 lg:rounded-[2rem] lg:border lg:border-white/10 lg:bg-[var(--color-surface)] lg:p-6">
                       <p className="text-xs font-semibold tracking-[0.26em] uppercase text-[var(--color-accent)]">
                         {post.category ?? "Club News"} • {formatDate(post.date)}
                       </p>
                       <h3 className="mt-4 text-2xl font-semibold leading-tight text-white">
                         {post.title}
                       </h3>
-                      <p className="mt-4 text-base leading-7 text-[var(--color-text-muted)]">
+                      <p className="mt-3 line-clamp-2 text-[15px] leading-6 text-[var(--color-text-muted)] lg:mt-4 lg:line-clamp-none lg:text-base lg:leading-7">
                         {post.excerpt}
                       </p>
                       <Link
                         href={`/news/${post.slug}/`}
-                        className="mt-6 inline-flex text-sm font-semibold uppercase tracking-[0.24em] text-white hover:text-[var(--color-accent)]"
+                        className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold uppercase tracking-[0.24em] text-white hover:text-[var(--color-accent)] lg:mt-6"
                       >
                         Read update
                       </Link>
@@ -175,27 +177,27 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-[var(--color-bg-alt)] py-16">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <section className="border-t border-white/10 bg-[var(--color-bg-alt)] py-10 lg:py-16">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Reveal>
-            <div className="grid items-center gap-8 border-y border-white/10 py-10 md:grid-cols-[0.7fr_1.3fr]">
+            <div className="grid items-center gap-6 border-y border-white/10 py-7 md:grid-cols-[0.7fr_1.3fr] md:gap-8 md:py-10">
               <div>
                 <p className="text-xs font-semibold tracking-[0.34em] uppercase text-[var(--color-accent)]">
                   Club Sponsor
                 </p>
-                <h2 className="mt-3 font-display text-4xl leading-none text-white sm:text-5xl">
+                <h2 className="mt-3 font-display text-3xl leading-none text-white sm:text-5xl">
                   Supporting soccer in our community.
                 </h2>
               </div>
 
-              <div className="flex min-h-36 items-center justify-center border-l-0 border-white/10 px-4 md:border-l md:px-10">
+              <div className="flex min-h-28 items-center justify-center border-l-0 border-white/10 px-4 md:min-h-36 md:border-l md:px-10">
                 <Image
                   src="/images/sponsors/sc-endodontics.svg"
                   alt="SC Endodontics, LLC — Specialty Root Canal Treatment"
                   width={504}
                   height={683}
                   unoptimized
-                  className="h-auto max-h-72 w-auto max-w-full"
+                  className="h-auto max-h-32 w-auto max-w-full md:max-h-72"
                 />
               </div>
             </div>
@@ -203,8 +205,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-[linear-gradient(135deg,var(--color-accent-strong),var(--color-bg))] py-20">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:px-12">
+      <section id="registration-cta" className="border-t border-white/10 bg-[linear-gradient(135deg,var(--color-accent-strong),var(--color-bg))] py-14 lg:py-20">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:gap-8 lg:px-12">
           <Reveal>
             <div className="max-w-3xl">
               <p className="text-xs font-semibold tracking-[0.34em] uppercase text-[var(--color-accent)]">
@@ -220,11 +222,11 @@ export default async function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.08}>
-            <div className="flex flex-wrap gap-3">
-              <LinkButton href={linksConfig.recreationalRegistration}>
+            <div className="grid gap-3 sm:flex sm:flex-wrap">
+              <LinkButton href={linksConfig.recreationalRegistration} className="w-full active:scale-[0.98] sm:w-auto">
                 Register for MLS GO
               </LinkButton>
-              <CtaButton href={linksConfig.contact} variant="secondary">
+              <CtaButton href={linksConfig.contact} variant="secondary" className="w-full active:scale-[0.98] sm:w-auto">
                 Contact for Competitive
               </CtaButton>
             </div>

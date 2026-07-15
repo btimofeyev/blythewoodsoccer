@@ -19,6 +19,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
   const safeSlides = slides.filter(Boolean);
   const [activeIndex, setActiveIndex] = useState(0);
   const [contactOpen, setContactOpen] = useState(false);
+  const [desktopCarousel, setDesktopCarousel] = useState(false);
   const [contactSubject, setContactSubject] = useState<string>(contactConfig.defaultSubject);
   const activeSlide = safeSlides[activeIndex] ?? safeSlides[0];
 
@@ -28,7 +29,17 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
   }
 
   useEffect(() => {
-    if (safeSlides.length <= 1 || contactOpen) {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const syncDesktopCarousel = () => setDesktopCarousel(mediaQuery.matches);
+
+    syncDesktopCarousel();
+    mediaQuery.addEventListener("change", syncDesktopCarousel);
+
+    return () => mediaQuery.removeEventListener("change", syncDesktopCarousel);
+  }, []);
+
+  useEffect(() => {
+    if (safeSlides.length <= 1 || contactOpen || !desktopCarousel) {
       return;
     }
 
@@ -37,7 +48,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
     }, AUTO_ADVANCE_MS);
 
     return () => window.clearInterval(interval);
-  }, [contactOpen, safeSlides.length]);
+  }, [contactOpen, desktopCarousel, safeSlides.length]);
 
   if (!activeSlide) {
     return null;
@@ -45,7 +56,8 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
 
   return (
     <section
-      className="relative isolate overflow-hidden border-b border-white/10 bg-[var(--color-bg)] pt-28 sm:pt-32"
+      id="club-hero"
+      className="relative isolate overflow-hidden border-b border-white/10 bg-[var(--color-bg)] pt-[4.25rem] lg:pt-32"
       aria-label="Club hero"
       aria-roledescription="carousel"
     >
@@ -56,7 +68,120 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,var(--color-accent-glow),transparent_28%),radial-gradient(circle_at_bottom_right,var(--color-accent-soft),transparent_36%)]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 pb-16 sm:px-8 lg:px-12">
+      <div className="relative lg:hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSlide.id}
+            initial={{ opacity: 0, scale: 1.015 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.99 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="relative aspect-[4/3] min-h-72"
+          >
+            <Image
+              src={activeSlide.image}
+              alt=""
+              fill
+              priority={activeIndex === 0}
+              unoptimized
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.08)_16%,rgba(15,23,42,0.94)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 px-5 pb-6 sm:px-8 sm:pb-8">
+              <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[var(--color-accent)]">
+                {activeSlide.eyebrow}
+              </p>
+              <h1 className="mt-2 max-w-xl font-display text-[2.55rem] leading-[0.9] text-white sm:text-5xl">
+                {activeSlide.title}
+              </h1>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="px-5 pt-5 pb-7 sm:px-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSlide.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ type: "spring", stiffness: 120, damping: 22 }}
+            >
+              <p className="text-[15px] leading-6 text-[var(--color-text-muted)]">
+                {activeSlide.body}
+              </p>
+
+              <CtaButton
+                href={activeSlide.ctaHref}
+                subject={activeSlide.contactSubject}
+                onContactRequest={handleContactRequest}
+                className="mt-5 w-full active:scale-[0.98]"
+              >
+                {activeSlide.ctaLabel}
+              </CtaButton>
+
+              {activeSlide.details?.length ||
+              (activeSlide.secondaryCtaHref && activeSlide.secondaryCtaLabel) ? (
+                <details className="group mt-3 border-y border-white/10">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between py-3 text-sm font-semibold text-white [&::-webkit-details-marker]:hidden">
+                    <span>{activeSlide.id === "recreation" ? "Season details" : "More details"}</span>
+                    <span className="text-lg font-normal text-[var(--color-accent)] transition-transform duration-300 group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  {activeSlide.details?.length ? (
+                    <dl className="divide-y divide-white/10 border-t border-white/10">
+                      {activeSlide.details.map((detail) => (
+                        <div key={detail.label} className="grid gap-1 py-3">
+                          <dt className="text-[10px] font-semibold tracking-[0.22em] uppercase text-[var(--color-accent)]">
+                            {detail.label}
+                          </dt>
+                          <dd className="text-sm leading-6 text-white">{detail.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  ) : null}
+                  {activeSlide.secondaryCtaHref && activeSlide.secondaryCtaLabel ? (
+                    <CtaButton
+                      href={activeSlide.secondaryCtaHref}
+                      variant="ghost"
+                      className="mb-4 w-full active:scale-[0.98]"
+                    >
+                      {activeSlide.secondaryCtaLabel}
+                    </CtaButton>
+                  ) : null}
+                </details>
+              ) : null}
+            </motion.div>
+          </AnimatePresence>
+
+          {safeSlides.length > 1 ? (
+            <div className="mt-4 flex items-center gap-1" aria-label="Choose featured update">
+              {safeSlides.map((slide, index) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Show ${slide.eyebrow}`}
+                  aria-current={index === activeIndex ? "true" : undefined}
+                  className="group flex min-h-11 flex-1 items-center justify-center active:scale-[0.98]"
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <span
+                    className={`h-1 w-full rounded-full transition duration-300 ${
+                      index === activeIndex
+                        ? "bg-[var(--color-accent)]"
+                        : "bg-white/20 group-hover:bg-white/40"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="relative mx-auto hidden max-w-7xl px-6 pb-16 sm:px-8 lg:block lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="max-w-3xl">
             <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,var(--color-surface-strong),rgba(255,255,255,0.02))] p-5 sm:p-8 lg:p-10">
@@ -128,7 +253,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
                       type="button"
                       aria-label={`Show ${slide.eyebrow}`}
                       aria-current={index === activeIndex ? "true" : undefined}
-                      className="group flex h-2 items-center"
+                      className="group flex min-h-11 items-center"
                       onClick={() => setActiveIndex(index)}
                     >
                       <span
@@ -161,6 +286,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
                   fill
                   priority={activeIndex === 0}
                   unoptimized
+                  sizes="(min-width: 1024px) 55vw, 100vw"
                   className="object-cover object-center"
                 />
               </motion.div>
